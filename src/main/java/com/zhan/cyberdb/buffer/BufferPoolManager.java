@@ -124,4 +124,13 @@ public class BufferPoolManager {
             replacer.unpin(pageId);
         }
     }
+
+    /**
+     * 核心配套方法：向系统申请一个全新的页面 ID
+     * (当 B+ 树需要造新节点、或者分裂节点时调用)
+     */
+    public int allocatePage() {
+        // 直接让底层的磁盘苦力去生成一个绝对不会重复的新 Page ID
+        return diskManager.allocatePage();
+    }
 }
